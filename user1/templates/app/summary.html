@@ -1,0 +1,365 @@
+{% extends "index.html" %}
+
+{% block style%}
+{% load static%}
+
+<style>
+    #c{
+        position:absolute;
+        top:20vh;
+        left:8vw;
+    }
+    #summary{
+      box-shadow:-2px -2px 7px  black;
+      background-color:#f1f1f1;
+      border-radius:1rem;
+      border:2px solid black;
+    }
+
+    .list-group{
+        margin:1rem;
+    }
+    .list-group-item {
+        width:20vw;
+    }
+    #firstul li {
+        font-weight:600;
+    }
+    #placeorder{
+      display:flex;
+      justify-content:space-between;
+        border-radius:1rem;
+        position: sticky;
+        margin-top:2rem;
+        padding:1vh;
+        bottom: 0;
+        color:white;
+        background-color:orangered;
+    }
+    #showaddress{
+      box-shadow:2px 2px 7px black;
+      margin-top:2rem;
+    }
+    #address-form{
+      box-shadow:2px 2px 7px  green;
+      background-color:#f1f1f1;
+        border-radius:1rem;
+        padding:2rem;
+        margin-top:2rem;
+        border:2px solid black;
+    }
+    #address-form form{
+      
+        margin-top:1rem;
+        padding:1rem;
+    }
+    #showaddressall{
+      display:none;
+      margin-top:2rem;
+      height:70vh;
+      border:2px solid black;
+      background-color:#f1f1f1;
+
+      overflow-y: scroll;
+    }
+    .form-check{
+      margin:2rem;
+    }
+    .address-radio{
+      cursor: pointer;
+    }
+    .id-address{
+      display:none;
+    }
+    body{
+      background-color:#d7ffd7;
+    }
+
+    #total{
+      margin-left:3rem;
+    }
+    #placeorder a:hover{
+        background-color:green;
+    }
+    .deliverytime{
+      color:orangered;
+    }
+    @media (max-width:735px) {
+      #c{
+        top:10vh;
+        left:0vw;
+      }
+      #total{
+        margin-left:0rem;
+      }
+      .list-group li{
+        font-size:13px;
+      }
+    }
+</style>
+
+{% endblock%}
+
+{% block body%} 
+
+<div class="container" id='c'>
+
+    <div id="summary">
+        <ul class="list-group list-group-horizontal" id="firstul">
+            <li class="list-group-item">Product Name</li>
+            <li class="list-group-item">Quantity</li>
+            <li class="list-group-item">Price</li>
+            <li class="list-group-item">Total</li>
+          </ul>      
+    </div>
+
+    <div id="showaddress">
+
+      {% for i in showaddress %}
+      {% if forloop.first %}
+        <div class="card">
+          <div class="card-body">
+            <div id="card-bodyleft">
+              <p class='addressid d-none'>{{i.id}}</p>
+              <p class="deliverytime" id='deliverytime'>Delivery in 30minutes</p>
+              <p>Deliver to: <h6>{{i.name}},{{i.zip}}</h6></p>
+              <p>{{i.address}},{{i.city}},{{i.state}}</p>
+            </div>
+            <div id="card-body-right">
+              <a href="#" class="addresschange btn btn-dark ">change</a>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div id="showaddressall">
+      {% for i in showaddress %}
+      <div class="form-check">
+        <input class="form-check-input address-radio" type="radio" name="flexRadioDefault" data-id="{{i.id}}" data-name="{{i.name}}" data-zip="{{i.zip}}" data-address="{{i.address}}" data-city="{{i.city}}" data-state="{{i.state}}">
+        <div class="card">
+          <div class="card-body">
+            <div id="card-bodyleft">
+              <p>Deliver to: <h6>{{i.name}},{{i.zip}}</h6></p>
+              <p>{{i.address}},{{i.city}},{{i.state}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div id="address-form">
+        <h3>Enter Your Address</h3>
+        <form class="row g-3" action='{% url 'summary'%}' method='Post'>
+            {% csrf_token %}
+            <div class="col-md-6">
+              <label for="inputname" class="form-label">Name</label>
+              <input type="text" class="form-control" id="inputname" name='name-address'>
+            </div>
+            <div class="col-md-6">
+              <label for="inputPhone" class="form-label">Phone</label>
+              <input type="Phone" class="form-control" id="inputPhone" name='phone-address'>
+            </div>
+            <div class="col-12">
+              <label for="inputAddress" class="form-label">Address</label>
+              <input type="text" class="form-control" id="inputAddress" name='address-address'>
+            </div>
+            <div class="col-12">
+              <label for="inputAddress2" class="form-label">Address 2</label>
+              <input type="text" class="form-control" id="inputAddress2" name='address2-address'>
+            </div>
+            <div class="col-md-6">
+              <label for="inputCity" class="form-label">City</label>
+              <input type="text" class="form-control" id="inputCity" name='city-address'>
+            </div>
+            <div class="col-md-4">
+              <label for="inputState" class="form-label">State</label>
+              <select id="inputState" name ='state-address' class="form-select">
+                <option selected>Choose...</option>
+                
+                {% comment %} <option value="AndhraPradesh"> Andhra Pradesh</option>
+                <option value="ArunachalPradesh"> Arunachal Pradesh</option>
+                <option value="Assam"> Assam</option> {% endcomment %}
+                <option value="Bihar"> Bihar</option>
+                {% comment %} <option value="Chhattisgarh"> Chhattisgarh</option>
+                <option value="Goa"> Goa</option>
+                <option value="Gujarat"> Gujarat</option>
+                <option value="Haryana"> Haryana</option>
+                <option value="HimachalPradesh"> Himachal Pradesh</option>
+                <option value="Jharkhand"> Jharkhand</option>
+                <option value="Karnataka"> Karnataka</option>
+                <option value="Kerala"> Kerala</option>
+                <option value="MadhyaPradesh"> Madhya Pradesh</option>
+                <option value="Maharashtra"> Maharashtra</option>
+                <option value="Manipur"> Manipur</option>
+                <option value="Meghalaya"> Meghalaya</option>
+                <option value="Mizoram"> Mizoram</option>
+                <option value="Nagaland"> Nagaland</option>
+                <option value="Odisha"> Odisha</option>
+                <option value="Punjab"> Punjab</option>
+                <option value="Rajasthan"> Rajasthan</option>
+                <option value="Sikkim"> Sikkim</option>
+                <option value="TamilNadu"> Tamil Nadu</option>
+                <option value="Telangana"> Telangana</option>
+                <option value="Tripura"> Tripura</option>
+                <option value="UttarPradesh"> Uttar Pradesh</option>
+                <option value="WestBengal"> West Bengal</option>
+                <option value="Uttarakhand"> Uttarakhand</option> {% endcomment %}
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label for="inputZip" class="form-label">Zip</label>
+              <input type="text" class="form-control" id="inputZip" name='zip-address'>
+            </div>
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Save address</button>
+            </div>
+          </form>
+    </div>
+    <div id='placeorder'>
+      <h2 id='total'></h2>
+      <a href="{% url 'payment'%}" class='btn btn-dark'><span>Payment</span></a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script%}
+
+<script>
+      let paancart = JSON.parse(localStorage.getItem('paancart'));
+      
+      let summary = document.getElementById('summary');
+      let totalprice = document.getElementById('total');
+      let addresschange = document.getElementById('addresschange');
+      let showaddress = document.getElementById('showaddress');
+      let showaddressall = document.getElementById('showaddressall');
+      let deliverytime = document.getElementById('deliverytime');
+
+      
+      let addressidElement = document.querySelector('.addressid');
+      if(addressidElement != null){
+
+        addressid = parseInt(addressidElement.textContent);
+        console.log('address id --->', addressid);
+        for(let productid in paancart){
+          paancart[productid]['addressid'] = addressid;
+          console.log(paancart[productid])
+        }
+        localStorage.setItem('paancart', JSON.stringify(paancart));
+      }
+
+      let total = 0
+      let previoustotal = 0
+      console.log('ayush')
+      $('.address-radio').change(function() {
+        let id = $(this).data('id');
+        console.log('id:', id);
+        let name = $(this).data('name');
+        let zip = $(this).data('zip');
+        let address = $(this).data('address');
+        let city = $(this).data('city');
+        let state = $(this).data('state');
+
+        let deliveryTime;
+
+
+        if (city.toLowerCase() === 'muzaffarpur') {
+          deliveryTime = '30 minutes';
+        } 
+        else if (city.toLowerCase() === 'patna') {
+          deliveryTime = '3 hours';
+        }
+        else if (city.toLowerCase() === 'motihari') {
+          deliveryTime = '2 hours';
+        }
+        else if (city.toLowerCase() === 'chappra') {
+          deliveryTime = '1.5 hours';
+        }
+        else if (city.toLowerCase() === 'vaishali') {
+          deliveryTime = '1 hours';
+        }
+        else if (city.toLowerCase() === 'hajipur') {
+          deliveryTime = '1 hours';
+        }
+        else if (city.toLowerCase() === 'samastipur') {
+          deliveryTime = '2 hours';
+        }
+        else if (city.toLowerCase() === 'sitamarhi') {
+          deliveryTime = '2 hours';
+        }
+        else if (city.toLowerCase() === 'darbhanga') {
+          deliveryTime = '1 hours';
+        }
+        else if (city.toLowerCase() === 'katihar') {
+          deliveryTime = '5 hours';
+        }
+        else if (city.toLowerCase() === 'gopalganj') {
+          deliveryTime = '3 hours';
+        }
+        else if (city.toLowerCase() === 'nalanda') {
+          deliveryTime = '6 hours';
+        }
+
+        
+        for(let productid in paancart){
+          paancart[productid]['deliverytime'] = deliveryTime;
+          console.log(paancart[productid])
+        }
+        localStorage.setItem('paancart', JSON.stringify(paancart));
+
+      let content = `
+        <div class="card">
+          <div class="card-body">
+            <div id="card-bodyleft">
+              <p class='addressid d-none'>${id}</p>
+              <p style='color:orangered;'>Delivery in ${deliveryTime}</p>
+              <p>Deliver to: <h6>${name},${zip}</h6></p>
+              <p>${address},${city},${state}</p>
+              
+            </div>
+            <div id="card-body-right">
+              <a href="#" class="addresschange btn btn-dark">change</a>
+            </div>
+          </div>
+        </div>
+      `;
+        for(let productid in paancart){
+          paancart[productid]['addressid'] = id;
+          console.log(paancart[productid])
+        }
+        localStorage.setItem('paancart', JSON.stringify(paancart));
+      
+      $('#showaddress').html(content);
+      $('#showaddress').css('display', 'block');
+      $('#showaddressall').css('display', 'none');
+    });
+
+    for (let productId in paancart) {
+        total += paancart[productId].price
+        let costEach = paancart[productId].price / paancart[productId].quantity;
+        let ul = document.createElement('ul');
+        ul.classList.add('list-group');
+        ul.classList.add('list-group-horizontal');
+        ul.innerHTML = `
+        <li class="list-group-item">${paancart[productId].productname}</li>
+        <li class="list-group-item">${paancart[productId].quantity}</li>
+        <li class="list-group-item">₹${costEach} </li>
+        <li class="list-group-item">₹${paancart[productId].price} </li>
+        `
+        
+        summary.appendChild(ul);
+    }
+    console.log(total)
+    totalprice.innerText =`Total Amount : ₹${total}`;
+
+    $(document).on('click', '.addresschange', function() {
+      
+      
+      $('#showaddress').css('display', 'none');
+      $('#showaddressall').css('display', 'block');
+      console.log('Address clicked');
+  });
+  
+</script>    
+{% endblock%}

@@ -1,0 +1,75 @@
+#productbody{
+    position: absolute;
+    top: 15vh;
+}
+#main{
+    display: flex;
+}
+#main-left{
+    margin-left: 10px;
+    margin-right: 25px;
+    /* background-color: red; */
+    position: sticky;
+    top: 67px;
+    align-self: flex-start;
+}
+#paan-image{
+    border-radius: 8px;
+    border: 0.3px solid black;
+    background-color:whitesmoke;
+}
+#paan-image img{
+    height: 400px;
+    width: 500px;
+}
+#cart-buynow{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    gap: 14px;
+}
+#cart-buynow a{
+    /* background-color: blue; */
+    padding: 2vh 3vw;
+    border-radius: 8px;
+    border: none;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+#cart-buynow a:first-child{
+    background-color: rgb(154, 243, 21);
+}
+#cart-buynow a:last-child{
+    background-color: orangered;
+}
+#cart-buynow i{
+    margin-right: 8px;
+}
+#main-right{
+    margin-right: 20px;
+}
+#main-right h6{
+    color: green;
+}
+#main-right h5 span{
+    margin-right: 5px;
+    color: red;
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+#main-right span h6{
+    display: inline;
+    color: green;
+}
+#main-right p{
+    text-align: justify;
+}
+#main-right i{
+    margin-right: 8px;
+    color: orangered;
+}

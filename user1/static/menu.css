@@ -1,0 +1,75 @@
+#menubody{
+    height: 91.9%;
+    width: 100%;
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('Images/14-BG.jpg');
+}
+.menulist{
+    color: white;
+}
+#paan{
+    display: flex;
+    justify-content: space-between;
+}
+#paannaam{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(2,4fr);
+    gap: 4rem;
+}
+#paannaam ul li{
+    list-style: none;
+}
+
+#paannaam ul li a{
+    /* background-color: red; */
+    text-decoration: none;
+    color: white;
+}
+#menuimg{
+    display: flex;
+    align-items: center;
+    align-content: center;
+    /* justify-content: end; */
+}
+#menuimage{
+    /* border: 2px solid black; */
+    visibility:hidden;
+    
+}
+#paannaam ul li:nth-child(1) a {
+    font-size: 20px;
+    font-weight: bolder;
+}
+#navbar{
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+
+}
+#menubody{
+    position: absolute;
+    top: 53px;
+    z-index: 1;
+}
+@media (max-width : 1100px) and (min-width: 600px){
+    #paannaam{
+        font-size: 1rem;
+    }
+    #paannaam ul li:nth-child(1) a {
+        font-size: 15px;
+        font-weight: bolder;
+    }
+    #menuimage{
+        height: 230px !important;
+        width: 250px !important;
+    }
+}
+@media (max-width:765px){
+    #menuimg{
+        display: none;
+    }
+    #menubody{
+        height: 93.8%;
+    }
+
+}

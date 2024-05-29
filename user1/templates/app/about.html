@@ -1,0 +1,163 @@
+{% extends "index.html" %}
+
+{% block style%}
+
+
+
+<style>
+    #aboutbody{
+        
+        position:absolute;
+        top:11vh;
+        left:8vw;
+    }
+    footer{
+        color: white;
+        background: #7c7c7c;
+    }
+    #footerend h4{
+        font-weight: 300;
+    }
+    #location ul,#contact ul , #legals ul{
+        
+        list-style: none;
+        margin: 25px 0px;
+        
+    }
+    #location ul li a,#contact ul li a , #legals ul li a{
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 18px;
+        
+    }
+    #location ul li ,#contact ul li  , #legals ul li {
+        padding: 10px 0px;
+        
+    }
+    #location ul li:first-child a ,#contact ul li:first-child a,#legals ul li:first-child a{
+        font-size: 23px;
+        font-weight: 900;
+    }
+    #location ul li:nth-child(5) a ,#contact ul li:nth-child(5) a,#legals ul li:nth-child(5) a{
+        font-size: 21px;
+        font-weight: 900;
+    }
+    
+</style>
+{% load static%}
+
+
+
+{% endblock%}
+
+{% block body%} 
+<div id="aboutbody">
+
+    
+    <main>
+        <div class="container py-4" id='aboutmain'>
+            
+            
+            <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+                <div class="container-fluid py-5">
+                    <h1 class="display-5 fw-bold">PaanParadise</h1>
+                    <p class="col-md-8 fs-4">At PaanParadise, we're passionate about bringing the authentic flavors and cultural richness of e-pan to your doorstep. As avid enthusiasts of this beloved tradition, we embarked on a journey to create a platform where enthusiasts like you can explore, savor, and share in the joy of e-pan.</p>
+                    
+                </div>
+            </div>
+  
+            <div class="row align-items-md-stretch">
+                <div class="col-md-6 my-2">
+                    <div class="h-100 p-5 text-bg-dark rounded-3">
+                        <h2>Brand Story</h2>
+                        <p>Our story began with a shared love for e-pan and a desire to make it accessible to everyone, regardless of geographical boundaries. Born out of a humble kitchen experiment, PaanParadise quickly evolved into a platform that celebrates the vibrant heritage and flavors of e-pan, while also embracing modern convenience.</p>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                        <h2>Mission and Values</h2>
+                        <p>At PaanParadise, our mission is simple yet profound: to preserve and promote the cultural heritage of e-pan while delighting taste buds around the world. We are committed to sourcing the finest ingredients, upholding traditional recipes, and fostering a sense of community among e-pan enthusiasts everywhere.</p>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                        <h2>Product Quality and Selection</h2>
+                        <p>Discover an unparalleled selection of handcrafted e-pan varieties, each meticulously curated to deliver an authentic taste experience. From classic favorites to innovative twists, our collection showcases the diversity and richness of e-pan culture, ensuring there's something for every palate.</p>
+                       
+                    </div>
+                </div>
+                <div class="col-md-6 my-2">
+                    <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                        <h2>Customer Service</h2>
+                        <p>Your satisfaction is our priority. Whether you're a seasoned e-pan aficionado or a curious newcomer, our dedicated team is here to assist you every step of the way. From personalized recommendations to timely support, we strive to exceed your expectations and make your e-pan journey unforgettable.</p>
+                        
+                    </div>
+                </div>
+                
+                <div class="p-5 mb-4 bg-body-tertiary rounded-3">
+                    <div class="container-fluid py-5">
+                        <h2 class="display-5 fw-bold">Meet the Team</h2>
+                        <p class="col-md-8 fs-4">Behind PaanParadise is a passionate team of e-pan enthusiasts, each bringing their unique expertise and dedication to the table. Get to know the faces behind the scenes and discover the driving force behind our commitment to excellence.</p>
+                    </div>
+
+                    <div class="container marketing">
+
+                        <!-- Three columns of text below the carousel -->
+                        <div class="row">
+                          <div class="col-lg-4 my-3">
+                            
+                            <h2 class="fw-normal">Ayush Kumar</h2>
+                            <strong>(Frontend Developer and <br> Backend Developer)</strong>
+                            <br>
+                            <strong>Contact : jrayush085@gmail.com </strong>
+                            
+                          </div>
+                          <!-- /.col-lg-4 -->
+                          <div class="col-lg-4 my-3">
+                            
+                            <h2 class="fw-normal">Aditya Kumar Pandey</h2>
+                            <strong>(Frontend Developer)</strong>
+                            <br>
+                            <strong>Contact : pandeyadityakumar135@gmail.com </strong>
+                            
+                          </div><!-- /.col-lg-4 -->
+                          <div class="col-lg-4 my-3">
+                            
+                            <h2 class="fw-normal">Adarsh Kumar Pandey</h2>
+                            <strong>(Frontend Developer)</strong>
+                            <br>
+                            <strong>Contact : pandeyadarshkumar97@gmail.com </strong>
+                            
+                          </div><!-- /.col-lg-4 -->
+                          <div class="col-lg-4 my-3">
+                            
+                            <h2 class="fw-normal">Sonu Kumar Pandit</h2>
+                            <strong>(Frontend Developer)</strong>
+                            <br>
+                            <strong>Contact : sonuku7256@gmail.com </strong>
+                            
+                          </div><!-- /.col-lg-4 -->
+                        </div><!-- /.row -->
+                    
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+    </main>
+    
+    
+</div>
+
+    
+    
+{% endblock %}
+
+{% block script%}
+    
+{% endblock%}

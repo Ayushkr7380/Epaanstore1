@@ -1,0 +1,188 @@
+{% extends "index.html" %}
+
+{% block style%}
+{% load static%}
+
+<style>
+    #box{
+        position:absolute;
+        top:20vh;
+        background-color:#f1f1f1;
+        border:2px solid black;
+        left:40vw;
+        height:45vh;
+        width:20vw;
+        padding:1rem;
+        box-shadow:2px 2px 5px  black;
+        
+    }
+    #payment{
+      flex-direction:column;
+        display:flex;
+        padding:1vh;
+        justify-content:space-between;
+        margin-top:5vh;
+    }
+    body{
+      background-color:#d7ffd7;
+    }
+    #placeorder{
+      box-shadow:2px 2px 5px green;
+    }
+    #placeorder:hover{
+      background-color:green;
+    }
+    #hiddenbox{
+      display:none;
+      position: absolute;
+      top:-1vh;
+      left:-3vw;
+      padding:2vh 4vw;
+      border-radius:1rem;
+      box-shadow:2px 2px 5px black;
+      background-color:white;
+      height:46vh;
+      width:30vw;
+      border:2px solid black;
+    }
+    #hiddenbox h5{
+      margin-top:5vh;
+      color:orangered;
+    }
+    #hiddenbox a{
+      margin-top:10vh;
+    }
+    @media (max-width:1022px) {
+      #box {
+        
+        top: 25vh;
+        left: 5vw;
+        width: 90%;
+        height:35vh;
+        margin: 0 auto;
+    }
+
+    #payment {
+        flex-direction: column;
+        align-items: center;
+    }
+    }
+    
+      
+</style>
+
+{% endblock%}
+
+{% block body%} 
+
+<div id="box">
+    {% csrf_token %}
+    <div id="modeofpayment">
+    <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDisabled" disabled>
+        <label class="form-check-label" for="flexRadioDisabled">
+          Pay via Credit card
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDisabled" disabled>
+        <label class="form-check-label" for="flexRadioDisabled">
+          Pay via Debit card
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDisabled" disabled>
+        <label class="form-check-label" for="flexRadioDisabled">
+          Pay via UPI
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault4" checked>
+        <label class="form-check-label" for="flexRadioDefault4">
+          Cash on delivery
+        </label>
+      </div>
+    </div>
+    <div id="payment">
+      <p id="deliverytime" style='color:orangered;'></p>
+      
+        <h5 id='totalprice'></h5>
+
+            <a href="#" type='submit' class='btn btn-dark btn-sm' id='placeorder'>Place order</a>
+    </div>
+
+  <div id="hiddenbox">
+    <h5>Your order has been placed,Checkout your orders at orders section.</h5>
+    <a href="{% url 'orders' %}" class="btn btn-primary" >View Orders</a>
+  </div>
+
+</div>
+
+{% endblock %}
+
+{% block script%}
+        <script>
+            let paancart = JSON.parse(localStorage.getItem('paancart'));
+
+            let totalprice = document.getElementById('totalprice');
+            let deliverytime = document.getElementById('deliverytime');
+            let placeorder = document.getElementById('placeorder');
+
+
+            total = 0 
+            d = ''
+            for(let paancartid in paancart)
+            {
+                let t = paancart[paancartid].price;
+                total+=t
+                let time = paancart[paancartid].deliverytime;
+                d+=time
+
+            }
+            deliverytime.innerText = `Deliver in ${d}`;
+            totalprice.innerText=`₹${total}`;
+
+    function getCSRFToken() {
+    const csrfTokenCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('csrftoken='));
+    if (csrfTokenCookie) {
+        return csrfTokenCookie.split('=')[1];
+    }
+    return null;
+}
+
+    placeorder.addEventListener('click', function(event) {
+    event.preventDefault(); 
+
+    let paancart = JSON.parse(localStorage.getItem('paancart'));
+    let csrfToken = getCSRFToken();
+
+
+    fetch('/auth/place_order/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify({ paancart: paancart })
+    })
+    .then(response => {
+      if (!response.ok) {
+          throw new Error('Network response was not ok');
+      }
+      localStorage.removeItem('paancart');
+      return response.json();
+  })
+    .then(data => {
+        console.log('Order placed successfully:', data);
+        document.getElementById('hiddenbox').style.display = 'block'
+        {% comment %} window.location.href='/auth/home'; {% endcomment %}
+
+    })
+    .catch(error => {
+        console.error('Error placing order:', error);
+    });
+});
+ </script>    
+
+
+{% endblock%}

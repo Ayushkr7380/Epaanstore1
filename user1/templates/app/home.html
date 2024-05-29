@@ -1,0 +1,96 @@
+{% extends "index.html" %}
+{% block style%}
+{% load static%}
+<link rel="stylesheet" href="{% static 'home.css'%}">
+{% endblock%}
+{% block body%} 
+    <div id="main">    
+        <div id="heading">
+            <h1>THE BEST PAAN OF INDIA <br>IS HERE!</h1>
+            <button id="ordernowbtn"><a href="{% url 'menu'%}">Order Now</a></button>
+        </div>
+    </div>
+    <h1 id="home-paan-heading">Our best Selling Paan</h1>
+    <div id="main2">
+        {% for i in meethapaan %}
+        <div id="main2-left">
+            <h3><span>PaanParadise </span> presents delicious <br><span class='span-paan'>{{i.name}}</span></h3>
+            <p class="p-paan p1">{{i.description}}</p>
+            <a href="{% url 'allproduct' %}?name=sweetpaan" class="p-paan p2" id="testJS"><i class="fa-solid fa-seedling"></i>&nbsp  Add to Cart</a>
+        </div>
+        <div id="main2-right">
+            <img src="{{i.image.url}}" alt="#">
+        </div>
+        {% endfor %}
+    </div>
+    <hr>
+    <div id="main3">
+        {% for i in firepaan %}
+        <div id="main3-left">
+            <img src="{{i.image.url}}" alt="#">
+        </div>
+        <div id="main3-right">
+            <h3><span>PaanParadise </span> presents delicious <br><span class='span-paan'>{{i.name}}</span></h3>
+            <p class="p-paan p1">{{i.description}}</p>
+            <a href="{% url 'allproduct' %}?name=specialpaan" class="p-paan p2" id="testJS"><i class="fa-solid fa-seedling"></i>&nbsp Add to Cart</a>
+        </div>
+        {% endfor %}
+    </div>
+    <hr>
+    <div id="main4">
+        {% for i in kesarpaan %}
+        <div id="main4-left">
+            <h3><span>PaanParadise </span> presents delicious <br><span class='span-paan'>{{i.name}}</span></h3>
+            <p class="p-paan p1">{{i.description}}</p>
+            <a href="{% url 'allproduct' %}?name=flavourpaan" class="p-paan p2" id="testJS"><i class="fa-solid fa-seedling"></i>&nbsp Add to Cart</a>
+        </div>
+        <div id="main4-right">
+            <img src="{{i.image.url}}" alt="#">
+        </div>
+        {% endfor %}
+    </div>
+    <footer>
+        <div id="footersec">
+            <div id="social">
+                <div id="logofooter">
+                    <h1>PaanParadise</h1>
+                </div>
+                <div id="media">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <div id="footerend">
+                    <h4>2024 Copyright &copy Paanparadise</h4>
+                </div>
+            </div>
+            <div id="location">
+                <ul>
+                    <li><a href="#">Location</a></li>
+                    <li><a href="#">Bihar</a></li>
+                    <li><a href="#">Delhi</a></li>
+                    <li><a href="#">Uttar Pradesh</a></li>
+                    <li><a href="#">Mumbai</a></li>
+                </ul>    
+            </div>
+            <div id="contact">
+                <ul>
+                    <li><a href="{% url 'contact'%}">Contact</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'about' %}">Teams</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>    
+            </div>
+            <div id="legals">
+                <ul>
+                    <li><a href="#">Legals</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                    <li><a href="#">Terms</a></li>
+                    <li><a href="#">Company</a></li>
+                </ul>    
+            </div>
+        </div>
+    </footer>
+{% endblock%}

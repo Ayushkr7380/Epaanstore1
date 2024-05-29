@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+
+{% block style%}
+
+
+<style>
+    #contact-body{
+        border-radius:3rem;
+        position:absolute;
+        top:11vh;
+        left:8vw;
+        padding:2rem;
+        background-color:#f9f9f9;
+    }
+    #contact-body h3{
+        font-family: "Platypi", serif;
+          font-optical-sizing: auto;
+          font-style: normal;
+    }
+    
+</style>
+{% load static%}
+
+<div id="contact-body" class="container">
+    <h3>Contact Paanparadise</h3>
+<div id="contact-main">
+    <form action='{% url 'contact' %}' method='Post'>
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="contactname" class="form-label">Name</label>
+          <input type="text" class="form-control" id="contactname" name="contactname" aria-describedby="emailHelp" required>
+          
+        </div>
+        <div class="mb-3">
+          <label for="contactemail" class="form-label">Email</label>
+          <input type="email" class="form-control" id="contactemail" name="contactemail" required>
+        </div>
+        <div class="mb-3">
+          <label for="contactphone" class="form-label">Phone</label>
+          <input type="phone" class="form-control" id="contactphone" name="contactphone" required>
+        </div>
+        <div class="mb-3">
+          <label for="contactaddress" class="form-label">Address</label>
+          <input type="text" class="form-control" id="contactaddress" name="contactaddress" required>
+        </div>
+        <div class="mb-3">
+            <label for="contactquery" class="form-label">Query</label>
+            <textarea name="contactquery" id="contactquery" class="form-control" cols="30" rows="10" required></textarea>
+            
+            <div id="queryHelp" class="form-text">We'll never share your email with anyone else.</div>
+          </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+</div>
+{% endblock%}
+
+{% block body%} 
+
+
+
+
+{% endblock %}
+
+{% block script%}
+    
+{% endblock%}

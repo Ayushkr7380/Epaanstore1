@@ -1,0 +1,65 @@
+{%extends 'index.html'%}
+
+{% block style%}
+<style>
+    
+    #loginbody{
+        border-radius: 30px;
+        margin-top: 20vh;
+        border: 2px solid black;
+        padding: 20px;
+        background-color: white;
+        color: darkgreen;
+        box-shadow:2px 2px 5px black;
+        
+    }
+    #loginbody h2{
+        text-align:center;
+        color: darkgreen;
+    }
+    #loginbtns{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        margin-top: 6vh;
+    }
+    #loginbtns a{
+        color: darkgreen;
+    }
+</style>
+{% endblock%}
+
+
+{%block body %}
+<div class="row justify-content-center">
+    <div class="col-sm-6" id="loginbody">
+        <h2>Login</h2>
+        <form action="{% url 'login'%}" method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group my-2">
+                <label for="{{ form.username.id_for_label}}"><strong>Name : </strong> </label>
+                <input type="text" name="{{ form.username.name}}" class= "form-control" value="{{form.username.value}}">
+                <span class="text-danger">{{ form.username.errors}}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password.id_for_label}}"><strong>Password : </strong></label>
+                <input type="Password" name="{{ form.password.name}}" class= "form-control" value="{{form.password.value}}">
+                <span class="text-danger">{{ form.password.errors}}</span>
+            </div>
+
+            <div id="loginbtns">
+                <button type="submit" class="btn btn-primary my-2">Login</button>
+                <a href="{%url 'signup'%}" class="btn btn-default">Sign Up Now</a>
+            </div>
+            
+            {%if form.non_field_errors %}
+            <small class="text-danger">
+                {{ form.non_field_errors.as_ul }}
+            </small>
+            {%endif%}
+        </form>
+    </div>    
+</div>
+{% endblock%}

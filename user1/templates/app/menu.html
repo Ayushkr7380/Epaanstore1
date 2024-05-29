@@ -1,0 +1,54 @@
+{% extends "index.html" %}
+
+{% block style%}
+{% load static%}
+<link rel="stylesheet" href="{% static 'menu.css'%}">
+{% endblock%}
+
+{% block body%} 
+<div id="menubody">
+    <div class="container " id="paan">
+        <div class="menu">
+            <div id="heading">
+                
+                <h4 class="menulist">Menu</h4>
+            </div>
+            <div id="paannaam">
+                <ul>
+                    <li><a href="{% url 'allproduct' %}?name=flavourpaan">FLAVOUR PAAN</a></li>
+                    {% for i in flavour_paan%}
+                    <li><a href="{% url 'product' %}?paan_name=flavourpaan&paan_type={{i.name}}" id='flavour{{i.id}}'>{{i.name}}</a></li>
+                    {% endfor %}                    
+                </ul>
+                <ul>
+                    <li><a href="{% url 'allproduct' %}?name=sweetpaan">SWEET PAAN</a></li>
+                    {% for i in sweet_paan%}
+                    <li><a href="{% url 'product' %}?paan_name=sweetpaan&paan_type={{i.name}}" id='sweet{{i.id}}'>{{i.name}}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul>
+                    <li><a href="{% url 'allproduct' %}?name=paanaroma">PAAN AROMA SPECIAL</a></li>
+                    {% for i in aroma_paan%}
+                    <li><a href="{% url 'product' %}?paan_name=paanaroma&paan_type={{i.name}}" id='aroma{{i.id}}'>{{i.name}}</a></li>
+                    {% endfor %}
+                </ul>
+                <ul>
+                    <li><a href="{% url 'allproduct' %}?name=specialpaan">SPECIAL PAAN</a></li>
+                    {% for i in special_paan%}
+                    <li><a href="{% url 'product' %}?paan_name=specialpaan&paan_type={{i.name}}" id='special{{i.id}}'>{{i.name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+        </div>
+        <div id="menuimg">
+            <img id="menuimage" src="" alt="img">
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script%}
+    {% load static %}
+    <script src="{% static 'menu.js' %}"></script>
+{% endblock%}

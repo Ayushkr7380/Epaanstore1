@@ -1,0 +1,328 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#heading
+{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    left: 13vw;
+    right: 13vw;
+    position:absolute;
+    top: 25vh;
+    z-index: 1;
+}
+#ordernowbtn{
+    background-color:orange;
+    color: aliceblue;
+    
+    border: none;
+    margin-top: 4rem;
+    border-radius: .4vw;
+}
+#ordernowbtn a{
+    font-weight: 600;
+    padding: 0vh 2vw;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+
+#heading h1{
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 3rem;
+    text-align: center;
+    color: aliceblue;
+}
+#main{
+    height: 70vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    animation: changeimg 20s infinite ;
+}
+@keyframes changeimg {
+    0%{
+        background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('Images/11.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        
+    }
+    25%{
+        background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('Images/12.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+    }
+    50%{
+        background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('Images/6.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+    }
+    75%{
+        background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url('Images/4.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+    }
+    100%{
+        background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('Images/9.jpg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+
+    }
+    
+}
+#home-paan-heading{
+    color: green;
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    margin: 3vh 0vw;
+    text-align: center;
+    text-decoration: underline;
+}
+#main2,#main3,#main4{
+    display: flex;
+    height:55vh;
+    margin: 10vh;
+}
+#main2-left,#main3-right,#main4-left{
+    margin-top: 10vh;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    align-self: flex-start;
+    flex-direction: column;
+    width: 80%;
+}
+#main2-left p,#main4-left p{
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+#main3-right p,#main3-right h3{
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+#main2-left h3,#main4-left h3{
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+#main2-left h3 span,#main4-left h3 span{
+    color: green;
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+#main3-right h3 span{
+    color: green;
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+.span-paan{
+    color: orangered !important;
+}
+
+#main2-right img,#main4-right img,#main3-left img{
+    height: 300px;
+    width: 400px;
+}
+
+.p2{
+    font-family: "Platypi", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    text-decoration: none;
+    color: white;
+    padding: 1vh 2vw;
+    border-radius: 1rem;
+    align-items: center;
+    align-content: center;
+    background-color: orangered;
+}
+.p3{
+    color: green;
+}
+
+
+#footersec{
+    padding: 6vh 0vw;
+    display: flex;
+    justify-content: space-around;
+}
+#logofooter{
+    margin: 35px 0px;
+}
+
+#media {
+    margin: 25px 0px;
+}
+#media a{
+    font-size: 4vh;
+    padding: 0vh 2vw;
+    color: white;
+}
+footer{
+    color: white;
+    background: #7c7c7c;
+}
+#footerend h4{
+    font-weight: 300;
+}
+#location ul,#contact ul , #legals ul{
+    
+    list-style: none;
+    margin: 25px 0px;
+    
+}
+#location ul li a,#contact ul li a , #legals ul li a{
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 18px;
+    
+}
+#location ul li ,#contact ul li  , #legals ul li {
+    padding: 10px 0px;
+    
+}
+#location ul li:first-child a ,#contact ul li:first-child a,#legals ul li:first-child a{
+    font-size: 23px;
+    font-weight: 900;
+}
+#location ul li:nth-child(5) a ,#contact ul li:nth-child(5) a,#legals ul li:nth-child(5) a{
+    font-size: 21px;
+    font-weight: 900;
+}
+
+
+@media (max-width: 890px) {
+
+        #main2,
+        #main3,
+        #main4 {
+            margin-left: 29%;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        #main2-right img,
+        #main4-right img,
+        #main3-left img {
+            margin-top: 38px;
+            height: auto;
+            width: 80%;
+            max-width: 300px;
+        }
+    
+        #main2-left,
+        #main3-right,
+        #main4-left {
+            margin-top: 5vh;
+        }
+    
+        .p-paan {
+            font-size: 14px; 
+        }
+    
+        .p2 {
+            padding: 8px 16px;
+            font-size: 14px; 
+        }
+    
+        #main2-left h3,
+        #main4-left h3,
+        #main3-right h3 {
+            font-size: 16px; 
+        }
+    
+    
+
+    #footersec {
+        padding: 3vh 0vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #logofooter {
+        margin: 20px 0;
+        text-align: center;
+    }
+    
+    #media {
+        margin: 15px 0;
+        text-align: center;
+    }
+    
+    #media a {
+        font-size: 3.5vh;
+        padding: 0 1.5vw;
+        color: white;
+    }
+    
+    footer {
+        color: white;
+        background: #7c7c7c;
+        text-align: center;
+    }
+    
+    #footerend h4 {
+        font-weight: 300;
+    }
+    
+    #location ul,
+    #contact ul,
+    #legals ul {
+        list-style: none;
+        margin: 15px 0;
+        padding: 0;
+    }
+    
+    #location ul li a,
+    #contact ul li a,
+    #legals ul li a {
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        font-size: 14px;
+    }
+    
+    #location ul li,
+    #contact ul li,
+    #legals ul li {
+        padding: 8px 0;
+    }
+    
+    #location ul li:first-child a,
+    #contact ul li:first-child a,
+    #legals ul li:first-child a {
+        font-size: 18px;
+        font-weight: 700;
+    }
+    
+    #location ul li:last-child a,
+    #contact ul li:last-child a,
+    #legals ul li:last-child a {
+        font-size: 16px;
+    }
+       
+}

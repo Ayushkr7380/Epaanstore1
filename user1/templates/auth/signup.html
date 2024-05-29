@@ -1,0 +1,66 @@
+{%extends 'index.html'%}
+
+
+{% block style%}
+<style>
+    #registerbody{
+        border-radius: 30px;
+        margin-top: 20vh;
+        border: 2px solid black;
+        padding: 20px;
+        background-color: white;
+        color: darkgreen;
+        box-shadow:2px 2px 5px black;
+    }
+    #registerbody h2{
+        text-align:center;
+        color:darkgreen;
+    }
+    #registerbtns{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        margin-top: 6vh;
+    }
+    #registerbtns a{
+        color:darkgreen;
+    }
+</style>
+{% endblock%}
+
+
+{%block body %}
+<div class="row justify-content-center">
+    <div class="col-sm-6" id="registerbody">
+        <h2>Register</h2>
+        <form action="{% url 'signup'%}" method="POST">
+            {% csrf_token %}
+            
+            <div class="form-group my-2">
+                <label for="{{ form.username.id_for_label}}"><strong>Username : </strong></label>
+                <input type="text" name="{{ form.username.name}}" class= "form-control" value="{{form.username.value}}">
+                <span class="text-danger">{{ form.username.errors}}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label}}"><strong>Password : </strong></label>
+                <input type="Password" name="{{ form.password1.name}}" class= "form-control" value="{{form.password1.value}}">
+                <span class="text-danger">{{ form.password1.errors}}</span>
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label}}"><strong>Confirm password : </strong></label>
+                <input type="password" name="{{ form.password2.name}}" class= "form-control" value="{{form.password2.value}}">
+                <span class="text-danger">{{ form.password2.errors}}</span>
+            </div>
+
+            <div id="registerbtns">
+                <button type="submit" class="btn btn-primary my-2">Register</button>
+                <a href="{%url 'login'%}" class="btn btn-default">Login</a>
+            </div>
+            
+        </form>
+    </div>
+    
+</div>
+{% endblock%}

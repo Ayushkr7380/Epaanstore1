@@ -1,0 +1,101 @@
+{% extends "index.html" %}
+
+{% block style%}
+{% load static%}
+
+<style>
+    #order-mainbody{
+        position:absolute;
+        top:11vh;
+        left:18vw;
+    }
+    #order-mainbody h3{
+        font-family: "Platypi", serif;
+          font-optical-sizing: auto;
+          font-style: normal;
+    }
+
+    #orders-details{
+        box-shadow:2px 2px 5px black;
+        border-radius:1rem;
+        background-color:#f9f9f9;
+        display: grid;
+        grid-template-columns:repeat(2,1fr);
+        width:60vw;
+        
+    }
+    #main-left{
+        padding: 1rem;
+        align-items:center;
+        border: 2px solid black;
+        margin: 2rem;
+    }
+    #main-left-image{
+        display: flex;
+        flex-direction: column;
+    }
+    #main-left-image img{
+        height: 8rem;
+        width: 8rem;
+    }
+    #main-left-data{
+        margin-left: 1vw;
+    }
+    .delivery{
+        color:green;
+    }
+    .orderstatus,.orderdate{
+        color:red;
+    }
+    @media (max-width:986px) {
+
+        #order-mainbody{
+            left:5vw;
+        }
+        #orders-details{
+            grid-template-columns:repeat(1,1fr);
+            width:90vw;
+            
+        }
+    
+    }
+    
+</style>
+
+{% endblock%}
+
+{% block body%} 
+
+
+<div id="order-mainbody" >
+    <h3>Your orders</h3>
+    <div id="orders-details" >
+    {% for i in orders%}
+    <div id="main-left"class='card test'>
+        <div id="main-left-image">
+            <img src="{{i.p_image.url}}" alt="Image not available">
+        </div>
+        <div id="main-left-data">
+            <h6 class="productname">{{i.p_name}}</h6>
+            <small class='productquantity'>Quantity :{{i.p_quantity}}</small>
+            <h5>&#8377;<span class="productprice">{{i.p_price}}</h5>
+
+            <strong class='orderstatus'>Deliver in {{i.p_deliverytime}}</strong>
+            <br>
+            <strong class='orderstatus'>{{i.status}}</strong>
+            <br>
+            {% comment %} <h6 class="delivery">Deliver in 30minutes</h6> {% endcomment %}
+            
+            {% comment %} <strong class='orderdate'>{{i.o_date}}</strong> {% endcomment %}
+        </div>
+        
+    </div>  
+    {%endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script%}
+    
+{% endblock%}

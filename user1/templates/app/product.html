@@ -1,0 +1,48 @@
+{% extends "index.html" %}
+
+{% block style%}
+{% load static%}
+
+<link rel="stylesheet" href="{% static 'product.css'%}">
+
+{% endblock%}
+
+{% block body%} 
+
+<div id="productbody">
+    {% for i in p_details %}
+    <div id="main">
+        <div id="main-left">
+            <div id="paan-image">
+                <img src="{{i.image.url}}" alt="">
+            </div>
+            <div id="cart-buynow">
+                <a href="{% url 'addtocart' %}?paan_name={{paan_name}}&paan_id={{i.id}}"><i class="fa-solid fa-cart-shopping" id="addtocart{{i.id}}"></i>ADD TO CART</a>
+                <a href="{% url 'addtocart' %}?paan_name={{paan_name}}&paan_id={{i.id}}"><i class="fa-solid fa-bolt" id="buynow{{i.id}}"></i>BUY NOW</a>
+            </div>
+        </div>
+        <div id="main-right">
+            <h5><span>Fresh</span>{{i.name}} <span>by PaanParadise</span></h5>
+            <p>{{i.description}}</p>
+            <h6>Special price</h6>
+            <h3>&#8377;{{i.price}} <span><h6>40% off</h6></span></h3>
+            <h5>Available offers</h5>
+            {% for offer in i.offers%}
+            <p><i class="fa-solid fa-seedling"></i>{{offer}}</p>
+            {% endfor %}
+            <h5>Benefits</h5>
+            {% for faida in i.benefit %}
+                <p><i class="fa-solid fa-seedling"></i>{{faida}}</p>
+            {% endfor%}
+            
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock %}
+
+{% block script%}
+    
+{% endblock%}

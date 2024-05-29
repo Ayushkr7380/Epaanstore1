@@ -1,0 +1,139 @@
+{% extends "index.html" %}
+
+{% block style%}
+{% load static%}
+<link rel="stylesheet" href="{% static 'addtocart.css'%}">
+
+{% endblock%}
+
+{% block body%} 
+<div class="c">
+    {% csrf_token %}
+    <div class="container alert alert-danger d-none" id="alert" role="alert">
+        Please select the quantity
+      </div>
+    <div id="addtocart-body">
+
+    
+    <div id="main" class="card">
+        {% for i in filteruser %}
+        
+        <div id="main-left"class='test'>
+            <div id="main-left-image">
+                <img src="{{i.image.url}}" alt="" class="productimage"> 
+                <select class="quantity" name="quantity">
+                    <option value="">Quantity</option>
+                </select>
+            </div>
+            <div id="main-left-data">    
+                <h3 class="productname">{{i.name}}</h3>
+                <p id='exculsivesale'>Exclusive sale</p>
+                <p id='desc'>Discover our amazing range of mouthwatering paan! We've put together a selection of delicious flavors that will totally blow your mind. From the classic sweetness of gulkand to the refreshing taste of fresh mint, our paan is like a party for your taste buds.</p>
+                <h5>&#8377;<span class="productprice">{{i.price}} </span><span class="updatedprice"></span></h5>
+                <small class='productid d-none'>{{i.id}}</small>
+                {% comment %} <p id='delivery'>Delivery in 30minutes</p> {% endcomment %}
+            </div>
+            
+        </div>    
+        {% endfor %}
+    </div>
+    <div id='summary'>
+        <a href="{% url 'summary'%}" class='btn btn-dark '>Checkout Now</a>
+    </div>
+</div>
+</div>
+
+
+
+{% endblock %}
+
+{% block script%}
+    <script>
+        const alert = document.getElementById('alert');
+
+        setTimeout(()=>{
+            alert.classList.remove('d-none');
+        },800);
+
+        setTimeout(()=>{
+            alert.remove();
+        },3000);
+
+
+        function updatequantity(productid,productname,quantity,price,image){
+            let paancart = JSON.parse(localStorage.getItem('paancart'));
+            if(!paancart){
+                paancart = {};
+            }
+            if(quantity>0){
+                paancart[productid] = { productid:productid,productname:productname,quantity: quantity, price: price,image:image};
+            }
+            else{
+                delete paancart[productid];
+            }
+        
+        
+        
+            localStorage.setItem('paancart',JSON.stringify(paancart));
+        }
+        
+        
+        let totalamount = 0
+        $(".quantity").on("change", function() {
+            let selectedQuantity = $(this).val();
+            console.log("Selected quantity: " + selectedQuantity);
+            
+            let parentContainer = $(this).closest('.test');
+        
+            let productprice = parentContainer.find(".productprice").text();
+            let productname = parentContainer.find(".productname").text();
+            let productimage = parentContainer.find(".productimage").attr('src'); 
+            let modifiedImage = productimage.substring(7);
+        
+            let previousTotal = parseInt(parentContainer.find(".updatedprice").text()) || 0;
+        
+            let productid = parseInt(parentContainer.find('.productid').text());
+            console.log('product id --->',productid)
+            
+            let total = parseInt(productprice) * parseInt(selectedQuantity);
+            console.log(total);
+        
+        
+            updatequantity(productid,productname,selectedQuantity,total,modifiedImage)
+        
+            if (selectedQuantity == 0)
+            {
+                parentContainer.css('display', 'none');
+                let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+                $.ajax({
+                    type: 'POST',
+                    url: '/auth/update_cart_quantity/',
+                    data: {
+                        'product_id': productid,
+                        'quantity': selectedQuantity,
+                        'csrfmiddlewaretoken': csrfToken // Include CSRF token
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            console.log('cart quantity updated successfully');
+                        } else {
+                            console.error('Error updating order quantity:', response.error);
+                        }
+                    },
+                    error: function(error) {
+                        console.error('Error updating order quantity:', error);
+                    }
+                });
+            
+            }
+            
+            parentContainer.find(".productprice").css('display', 'none');
+            parentContainer.find(".updatedprice").html(total);
+        
+        
+            totalamount = totalamount - previousTotal + total;
+            console.log('total --->',totalamount)
+        });        
+        
+    </script>
+{% endblock%}
